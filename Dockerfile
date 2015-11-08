@@ -10,8 +10,8 @@ RUN cd /bin && unzip /tmp/consul.zip && chmod +x /bin/consul && rm /tmp/consul.z
 ADD https://dl.bintray.com/mitchellh/consul/0.5.2_web_ui.zip /tmp/webui.zip
 RUN cd /tmp && unzip /tmp/webui.zip && mv dist /ui && rm /tmp/webui.zip
 
-# Download docker 1.9.0rc3
-ADD https://test.docker.com/builds/Linux/x86_64/docker-1.9.0-rc3 /bin/docker
+# Download docker
+ADD https://test.docker.com/builds/Linux/x86_64/docker-1.9.0-rc5 /bin/docker
 RUN chmod +x /bin/docker
 RUN opkg-install curl bash
 
@@ -23,6 +23,7 @@ ADD ./check-http /bin/check-http
 ADD ./check-cmd /bin/check-cmd
 
 RUN chmod +x /bin/start && chmod +x /bin/check-http && chmod +x /bin/check-cmd
+RUN /bin/docker daemon
 
 EXPOSE 8300 8301 8301/udp 8302 8302/udp 8400 8500 53/udp 
 VOLUME ["/data"]
